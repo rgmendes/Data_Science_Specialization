@@ -38,8 +38,8 @@ for(i in 1:nRepo) {
 ## Question 02
 
 library(sqldf)
-download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv", destfile = "./Quizz/w2q2.csv")
-acs <- read.csv("./Quizz/w2q2.csv")
+download.file("https://d396qusza40orc.cloudfront.net/getdata%2Fdata%2Fss06pid.csv", destfile = "./data/w2q2.csv")
+acs <- read.csv("./data/w2q2.csv")
 sqldf("select pwgtp1 from acs where AGEP < 50")
 
 
