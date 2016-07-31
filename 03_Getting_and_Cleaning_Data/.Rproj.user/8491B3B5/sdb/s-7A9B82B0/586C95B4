@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# The goals is tydi data\n# 1- Each variable forms a column\n# 2- Each observation forms a row\n# 3- Each table/file stores data about one kind of observation \n\n# Starting with rasphaping\nlibrary(reshape2)\nhead(mtcars)\n\n# Melting data frames\n\nmtcars$carname <- rownames(mtcars)\ncarMelt <- melt(mtcars, id=c(\"carname\",\"gear\", \"cyl\"), measure.vars = c(\"mpg\",\"hp\"))\n\nhead(carMelt)\ntail(carMelt)\n\n# Casting data frame\ndcast(carMelt, c(\"carname\",\"gear\", \"cyl\") ~ c(\"mpg\",\"hp\"))\n\ncylData <- dcast(carMelt, cyl+gear ~ variable)\ncylData\n\ncylData <- dcast(carMelt, cyl ~ variable, mean)\ncylData\n\n# Averaging values\n\nhead(InsectSprays)\ntapply(InsectSprays$count, InsectSprays$spray, sum)\ntapply(InsectSprays$count, InsectSprays$spray, nchar, simplify = FALSE)\n?tapply()\n\n# Another way - split\n\nspIns <- split(InsectSprays$count, InsectSprays$spray)\nspIns\n\n# Another way - apply\n\nsprCount <- lapply(spIns, sum) # Summing each different sprays across that list - OR\nsprCount <- lapply(split(InsectSprays$count, InsectSprays$spray), sum)\nsprCount\n\n# Another way - combine\n\nunlist(sprCount)\nsapply(spIns, sum)\n\n# Another way - plyr package\n\nddply(InsectSprays,.(spray), summarize, SUM=sum(count))\n\n# Creating new variable\n\nsplySums <- ddply(InsectSprays,.(spray), summarize, sum=ave(count, FUN=sum))",
+    "created" : 1469958135033.000,
+    "dirty" : true,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2383681444",
+    "id" : "586C95B4",
+    "lastKnownWriteTime" : 1468783284,
+    "last_content_update" : 1469959087650,
+    "path" : "C:/Users/b9984/Google Drive/Data_Science/Coursera/Data_Science_Specialization/03_Getting_and_Cleaning_Data/scripts/reshaping_data.R",
+    "project_path" : "scripts/reshaping_data.R",
+    "properties" : {
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

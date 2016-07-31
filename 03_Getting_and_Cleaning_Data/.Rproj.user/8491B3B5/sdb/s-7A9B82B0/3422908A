@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "## Check and download dataset\n\nif(!file.exists(\"UCI HAR Dataset\")){\nfileUrl <- \"https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip\"\ndir.create(path = \"./\")\ndownload.file(fileUrl, destfile = \"./db_project.zip\", mode=\"wb\")\nunzip(\"./db_project.zip\")\nfile.remove(\"./db_project.zip\")\nlist.files(\"./\")\nlist.files(\"./UCI HAR Dataset\")\n}\n\nlibrary(dplyr)\nlibrary(plyr)\nlibrary(data.table)\n\nfeatures <- fread(\"./UCI HAR Dataset/features.txt\")\nactivity_labels <- fread(\"./UCI HAR Dataset/activity_labels.txt\", col.names = c(\"codeActivity\", \"labelActivity\"))\n\n# Test\nX_test <- fread(\"./UCI HAR Dataset/test/X_test.txt\")\ny_test <- fread(\"./UCI HAR Dataset/test/y_test.txt\", col.names = \"Activity\")\nsubject_test <- fread(\"./UCI HAR Dataset/test/subject_test.txt\", col.names = \"Subject\")\ntest <- bind_cols(subject_test, y_test, X_test)\ndim(test)\nnames(test)\n\n# Train\nX_train <- fread(\"./UCI HAR Dataset/train/X_train.txt\")\ny_train <- fread(\"./UCI HAR Dataset/train/y_train.txt\", col.names = \"Activity\")\nsubject_train <- fread(\"./UCI HAR Dataset/train/subject_train.txt\", col.names = \"Subject\")\ntrain <- bind_cols(subject_train, y_train, X_train)\ndim(train)\n\n# Merge Test and Train\n\nmerge <- as.data.frame(bind_rows(train, test))\n\n# Add labels the data set with descriptive variable names\n\nnames(merge)[c(3:length(merge))] <- features$V2\nnames(merge) <- gsub('-mean', 'Mean', names(merge))\nnames(merge) <- gsub('-std', 'Std', names(merge))\nnames(merge) <- gsub('[-()]', '', names(merge))\n\n# Extracts only the measurements on the mean and standard deviation for each measurement\n\nmerge <- bind_cols(merge[,c(1:2)], merge[grepl(\"Mean|Std\",names(merge))])\n\n# Uses descriptive activity names to name the activities in the data set\n\nmerge$Activity <- activity_labels$labelActivity[match(merge$Activity, activity_labels$codeActivity)]\n\n\n# Calcule \n# Transform values em Factor\n\nmerge$Subject <- as.factor(merge$Subject)\nmerge$Activity <- as.factor(merge$Activity)\n\ntiry_data <- ddply(merge,.(Subject,Activity), function(x) colMeans(x[, 3:length(x)]))\n\nwrite.table(tiry_data, \"./tiry_data.txt\", row.names = FALSE)\n",
+    "created" : 1469920200390.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3534028723",
+    "id" : "3422908A",
+    "lastKnownWriteTime" : 1469961156,
+    "last_content_update" : 1469961156389,
+    "path" : "C:/Users/b9984/Google Drive/Data_Science/Coursera/Data_Science_Specialization/03_Getting_and_Cleaning_Data/Project/run_analysis.R",
+    "project_path" : "Project/run_analysis.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
