@@ -43,9 +43,9 @@ names(merge)[c(3:length(merge))] <- features$V2
 ## 8 - Filter only the columns containing "mean" and "std" and cleaning values column
 
 merge <- bind_cols(merge[,c(1:2)], merge[grepl("mean|std",names(merge))])
-names(merge) <- gsub('-mean', 'Mean', names(merge))
-names(merge) <- gsub('-std', 'Std', names(merge))
 names(merge) <- gsub('[-()]', '', names(merge))
+names(merge) <- gsub('-std', 'Std', names(merge))
+names(merge) <- gsub('-mean', 'Mean', names(merge))
 
 # 9 - Uses descriptive activity names to name the activities in the data set
 
