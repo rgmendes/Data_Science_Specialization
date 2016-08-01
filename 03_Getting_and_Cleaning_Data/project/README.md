@@ -12,7 +12,7 @@ This is the document that describes the steps to the final exercise of the cours
   1 - Check if the directory exists and downloads the project dataset
   2 - Load the required libraries for the project
   3 - Assignment of identifiers
-  4- Assignment of test data for the field "test"
+  4 - Assignment of test data for the field "test"
   5 - Assignment of train data for the field "train"
   6 - Merge the data fields "test" and "train" a new field "merge"
   7 - Add dataset name tags descriptive variables in the "features"
