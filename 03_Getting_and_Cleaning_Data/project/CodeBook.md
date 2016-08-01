@@ -1,20 +1,13 @@
----
-title: "Code Book | Getting and Cleaning Data"
-author: "Roberto Mendes"
-date: "31 de julho de 2016"
-output: html_document
----
-
-## Code Book | Getting and Cleaning Data
+# Code Book | Getting and Cleaning Data
 
 This codebook contains a summary of all the varíaves used contained in the file "tidy_data.txt" final result of the project.
 
-# Identifiers variables
+## Identifiers variables
 
   "Subject"
   "Activity"
 
-# Measured variables
+## Measured variables
 
   "tBodyAccMeanX"
   "tBodyAccMeanY"
