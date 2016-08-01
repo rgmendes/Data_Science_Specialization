@@ -47,11 +47,11 @@ names(merge) <- gsub('[-()]', '', names(merge))
 names(merge) <- gsub('-std', 'Std', names(merge))
 names(merge) <- gsub('-mean', 'Mean', names(merge))
 
-# 9 - Uses descriptive activity names to name the activities in the data set
+## 9 - Uses descriptive activity names to name the activities in the data set
 
 merge$Activity <- activity_labels$labelActivity[match(merge$Activity, activity_labels$codeActivity)]
 
-# 10 - Create a new dataset with the average of each variable for each unique values of "Subject" and "Activity". The result is saved in the file "tidy_data.txt"
+## 10 - Create a new dataset with the average of each variable for each unique values of "Subject" and "Activity". The result is saved in the file "tidy_data.txt"
 
 merge$Subject <- as.factor(merge$Subject)
 merge$Activity <- as.factor(merge$Activity)
