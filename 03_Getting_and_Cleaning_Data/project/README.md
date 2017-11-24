@@ -1,4 +1,4 @@
-## Getting and Cleaning Data | Course Project
+### Getting and Cleaning Data | Course Project
 
 This is the document that describes the steps to the final exercise of the course "Getting and Cleaning Date". 
 
